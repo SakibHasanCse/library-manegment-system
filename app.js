@@ -17,10 +17,10 @@ import xss from 'xss-clean'
 import fileUpload from 'express-fileupload'
 const app = express()
 
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.config({ path: './config/config.env' })
-    app.use(morgan('dev'))
-}
+// if (process.env.NODE_ENV !== 'production') {
+//     dotenv.config({ path: './config/config.env' })
+//     app.use(morgan('dev'))
+// }
 
 
 const mongourl = process.env.MONGODBURL
@@ -31,6 +31,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cors())
 app.use(helmet())
 app.use(xss())
+
 app.use(passport.initialize())
 conPassport(passport)
 

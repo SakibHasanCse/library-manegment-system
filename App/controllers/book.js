@@ -61,7 +61,7 @@ export const deleteBooks = async (req, res, next) => {
     try {
         const id = req.params.id
         const book = await deleteBook(id)
-        console.log(book)
+       
         if (book instanceof Error) {
             return next(book, req, res)
         } else {

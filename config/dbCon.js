@@ -5,7 +5,7 @@ import User from '../App/model/user';
 
 
 export const DBCON = (mongourl) => {
-    mongoose.connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(mongourl, { useNewUrlParser: true, useUnifiedTopology: true,})
         .then(async () => {
             console.log('database connected')
             const users = await User.find()

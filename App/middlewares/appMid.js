@@ -24,7 +24,7 @@ export const errorhandle = (err, req, res, next) => {
 }
 
 export const validatorhandler = (validate) => {
-    console.log(validate)
+   
 
     return (req, res, next) => {
         const result = validate(req.body)
