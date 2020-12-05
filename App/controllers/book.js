@@ -1,16 +1,23 @@
-import { createBook, deleteBook, getBook, updateBook, singleBooks, allBooks } from './../service/book';
-
-
+import { allBooks, createBook, deleteBook, getBook, singleBooks, updateBook } from './../service/book';
 export const createBooks = async (req, res, next) => {
     try {
+    
         const book = req.body
-        await createBook(book)
+        let image ;
+        image ?  image = req.files.image.data : null
+        const newbook = await createBook(book ,image)
+        if (newbook instanceof Error) {
+            return next(newbook, req, res)
+        }
+        return res.status(201).json({
+            success: true,
+            message: 'Book created successfully'
+        })
     } catch (error) {
         console.log(error)
-        return next(error ,req, res)   
-    }
-    
 
+        return next(error, req, res)
+    }
 }
 
 export const getBooks = async (req, res) => {
@@ -51,7 +58,6 @@ export const allBook = async (req, res, next) => {
 }
 
 export const deleteBooks = async (req, res, next) => {
-
     try {
         const id = req.params.id
         const book = await deleteBook(id)

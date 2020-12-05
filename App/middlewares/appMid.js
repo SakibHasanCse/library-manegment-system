@@ -29,11 +29,12 @@ export const validatorhandler = (validate) => {
     return (req, res, next) => {
         const result = validate(req.body)
 
-        if (result.error === null) {
+        if (result.error == null) {
 
             return next()
         }
-        const { details } = result.error
+      
+        const  {details}  = result.error
         const messages = details.map(msg => msg.message)
         const msg = messages.join(',')
 
@@ -51,4 +52,26 @@ export const setCorrelationId = async (req, res, next) => {
     }
     res.set('x-correlation-id', correlationId)
     return next();
+}
+
+
+export const defaultlibrarian  = {
+    name: 'Librarian',
+    email: 'librarian@gmail.com',
+    password: '1234567890',
+    role:'librarian'
+}
+
+
+const imagetypes = ['image/jpeg', 'image/png', 'image/jpg' , 'image/gif']
+
+export const bookImage = (book , image) =>{
+    if (!image) return null;
+    const img =JSON.parse(image)
+    if(img != null && imagetypes.includes(img.type)){
+        book.img = new Buffer.from(img.data , 'base64')
+        book.imgType =img.type
+
+    }
+
 }

@@ -14,7 +14,8 @@ const schema = joi.object().keys({
     active: joi
         .boolean(),
     image: joi
-        .string(),
+        .binary()
+        ,
     authorId: joi
         .string()
         .required()

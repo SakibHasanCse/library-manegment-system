@@ -6,6 +6,8 @@ import book from './../model/validation/book';
 const router = express.Router();
 
 
+
+
 router
     .route('/books')
     .get(isAuth, isLibarian(), getBooks)
@@ -13,7 +15,7 @@ router
 router
     .route('/book')
     .get(isAuth, allBook)
-    .post(isAuth, isLibarian(), validatorhandler(book), createBooks)
+    .post(isAuth, isLibarian(),  createBooks)
 
 
 router
