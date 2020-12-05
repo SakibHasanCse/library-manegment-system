@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
-import { defaultlibrarian } from '../App/middlewares/appMid';
-import User from '../App/model/user';
+import { defaultlibrarian } from '../src/middlewares/appMid';
+import User from '../src/model/user';
 
 
 export const DBCON = (mongourl) => {
