@@ -2,17 +2,18 @@
 
 import bodyparser from 'body-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
 import express from 'express'
+import fileUpload from 'express-fileupload'
+import helmet from 'helmet'
+import morgan from 'morgan'
+import passport from 'passport'
+import xss from 'xss-clean'
 import { errorhandle, setCorrelationId } from './middlewares/appMid'
+import { conPassport } from './middlewares/auth'
 import bookRouter from './router/book'
 import authRouter from './router/user'
-import passport from 'passport'
-import { conPassport } from './middlewares/auth'
-import helmet from 'helmet'
-import dotenv from 'dotenv'
-import morgan from 'morgan'
-import xss from 'xss-clean'
-import fileUpload from 'express-fileupload'
+const swagger = require('swagger-ui-express')
 const app = express()
 
 if (process.env.NODE_ENV !== 'production') {
@@ -36,6 +37,8 @@ app.use(setCorrelationId)
 
 app.use(authRouter)
 app.use(bookRouter)
+const swaggerDocument = require('./swagger.json')
+app.use('/api-docs', swagger.serve, swagger.setup(swaggerDocument))
 app.use(errorhandle)
 app.use((req, res, next) => {
     res.status(404).json({
